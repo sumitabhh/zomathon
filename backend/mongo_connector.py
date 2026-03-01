@@ -13,13 +13,22 @@ import os
 from datetime import datetime
 from dateutil import parser as dateparser
 
-MONGO_URL = "mongo-uri-here"
+# ── Load .env file ────────────────────────────────────────────
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass  # python-dotenv not installed — falls back to system env vars
+
+MONGO_URL = os.environ.get("MONGO_URL", "")
 
 
 def get_mongo_client():
     """Get pymongo client"""
     try:
         from pymongo import MongoClient
+        if not MONGO_URL:
+            raise ValueError("MONGO_URL is not set. Add it to your .env file.")
         client = MongoClient(MONGO_URL, serverSelectionTimeoutMS=5000)
         client.admin.command('ping')
         print("✅ MongoDB connected successfully")

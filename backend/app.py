@@ -14,6 +14,13 @@ from flask import Flask, jsonify, request, send_from_directory
 from collections import defaultdict
 import statistics
 
+# ── Load .env file ────────────────────────────────────────────
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass  # python-dotenv not installed — falls back to system env vars
+
 _FRONTEND_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "frontend")
 app = Flask(__name__, static_folder=_FRONTEND_DIR, static_url_path="")
 
@@ -36,9 +43,9 @@ CITIES = {
 }
 DEFAULT_CITY = {"tier": 2, "density": 0.60, "congestion_base": 0.50}
 
-MONGO_URL = (
-    "mongo-uri-here"
-)
+MONGO_URL = os.environ.get("MONGO_URL", "")
+if not MONGO_URL:
+    raise RuntimeError("MONGO_URL is not set. Add it to your .env file.")
 
 def parse_dt(val):
     if val is None:
