@@ -13,7 +13,7 @@ import os
 from datetime import datetime
 from dateutil import parser as dateparser
 
-MONGO_URL = "mongodb://root:viuVisi5ENJxWxbMr1drz7z0B10Pc87KnpYEMbEIu011bw9B6eCGvTWB5LnM9ZiT@31.97.232.35:27020/?directConnection=true"
+MONGO_URL = "mongo-uri-here"
 
 
 def get_mongo_client():

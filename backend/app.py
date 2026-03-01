@@ -37,7 +37,7 @@ CITIES = {
 DEFAULT_CITY = {"tier": 2, "density": 0.60, "congestion_base": 0.50}
 
 MONGO_URL = (
-    "mongodb://root:viuVisi5ENJxWxbMr1drz7z0B10Pc87KnpYEMbEIu011bw9B6eCGvTWB5LnM9ZiT@31.97.232.35:27020/?directConnection=true"
+    "mongo-uri-here"
 )
 
 def parse_dt(val):
